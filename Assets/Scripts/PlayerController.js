@@ -6,6 +6,7 @@
 //Player Handling
 var speed:float = 8;
 var acceleration:float = 12;
+var jumpPower:float = 20;
 
 private var _currentSpeed:float;
 private var _targetSpeed:float;
@@ -21,7 +22,15 @@ function Update() {
 	_targetSpeed = Input.GetAxisRaw("Horizontal") * speed;
 	IncrementSpeed();
 	
-	_movementVector = Vector2(_currentSpeed, 0);
+	_movementVector = Vector2(0, 0); 
+	
+	if (_playerPhysics.isGrounded()) {
+		if (Input.GetButtonDown("Jump")) {
+			_playerPhysics.Jump(jumpPower);
+		}
+	}
+	
+	_movementVector.x = _currentSpeed;
 	_playerPhysics.Move(_movementVector * Time.deltaTime);
 }
 
