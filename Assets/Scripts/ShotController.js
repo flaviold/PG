@@ -3,6 +3,9 @@
 var speed : float;
 
 function OnTriggerEnter (other: Collider) {
+	if(other.tag == "Player"){
+		GameManager.Kill(other.name);
+	}
 	Destroy(gameObject);
 }
 

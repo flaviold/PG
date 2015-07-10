@@ -21,14 +21,16 @@ function Awake () {
 }
 
 function Update() {
-	_jump = Input.GetButtonDown("Jump");
+	_jump = Input.GetButtonDown("Fire1");
 	
 	Jump(_jump);
 	CheckGround();
 }
 
 function FixedUpdate () {
-	_move = Input.GetAxis("Horizontal");
+	if (gameObject.name == "1"){
+		_move = Input.GetAxis("Horizontal");
+	}
 	
 	Move(_move);
 }
@@ -43,8 +45,10 @@ function Move(movement:float) {
 }
 
 function Jump(jump:boolean) {
-	if (_grounded && _jump) {
-		_rigidbody.velocity.y = jumpPower;
+	if (GameManager.GetJoystickNumber() == 	int.Parse(gameObject.name)) {
+		if (_grounded && _jump) {
+			_rigidbody.velocity.y = jumpPower;
+		}
 	}
 }
 

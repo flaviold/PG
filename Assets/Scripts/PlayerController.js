@@ -14,18 +14,22 @@ private var _movementVector:Vector2;
 
 private var _playerPhysics:PlayerPhysics;
 
+private var _playerNum:int;
+
 function Start() {
 	_playerPhysics = GetComponent.<PlayerPhysics>();
 }
 
 function Update() {
-	_targetSpeed = Input.GetAxisRaw("Horizontal") * speed;
-	IncrementSpeed();
+	if (gameObject.name == "1"){
+		_targetSpeed = Input.GetAxisRaw("Horizontal") * speed;
+		IncrementSpeed();
+	}
 	
 	_movementVector = Vector2(0, 0); 
 	
 	if (_playerPhysics.isGrounded()) {
-		if (Input.GetButtonDown("Jump")) {
+		if (Input.GetButtonDown("Joy1A")) {
 			_playerPhysics.Jump(jumpPower);
 		}
 	}
@@ -45,4 +49,3 @@ private function IncrementSpeed() {
 	
 	_currentSpeed = (dir == Mathf.Sign(_targetSpeed - cSpeed)) ? cSpeed : _targetSpeed;
 }
-
