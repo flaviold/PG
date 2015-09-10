@@ -5,8 +5,7 @@ using System.Collections;
 public class Actions : MonoBehaviour {
 
 	public float speed = 8f;
-	public float speedDampTime = 0.1f;
-	public float jumpPower = 5f;
+	public float jumpPower = 11f;
 
 	public float fireRate;
 	public GameObject shot;
@@ -93,13 +92,7 @@ public class Actions : MonoBehaviour {
 		if (isGrounded && jump) {
 			rigidbody.velocity = new Vector3(rigidbody.velocity.x, jumpPower, rigidbody.velocity.z);
 			isGrounded = false;
-			animator.applyRootMotion = false;
-			animator.SetTrigger ("Jump");
 		}
-		if (!isGrounded){
-			animator.SetFloat("Jump", rigidbody.velocity.y);
-		}
-
 	}
 
 	public void Aiming () {

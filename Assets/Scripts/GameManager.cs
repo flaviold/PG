@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour {
 
 	public static bool restart = false;
 	public static bool roundOver = false;
+	public static bool gameOver = false;
 	
 	private static GameObject player1;
 	private static GameObject player2;
@@ -31,12 +32,13 @@ public class GameManager : MonoBehaviour {
 		player1.name = "1";
 		player2 = (GameObject)Instantiate(player2Model, spawnPoint2.position, spawnPoint2.rotation);
 		player2.name = "2";
+		player2.GetComponent<Joystick1_Input>().enabled = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		HUDUpdate();
-		if (restart){
+		if (restart && !gameOver){
 			if (player1) Destroy(player1);
 			if (player2) Destroy(player2);
 
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour {
 			player1.name = "1";
 			player2 = (GameObject)Instantiate(player2Model, spawnPoint2.position, spawnPoint2.rotation);
 			player2.name = "2";
+			player2.GetComponent<Joystick1_Input>().enabled = false;
 			restart = false;
 		}
 	}
@@ -88,8 +91,14 @@ public class GameManager : MonoBehaviour {
 		if (roundOver) {
 			roundOver = false;
 			string winner = "";
-			if (player1) winner = "Player 1";
-			if (player2) winner = "Player 2";
+			if (player1) {
+				winner = "Player 1";
+				Destroy(player1);
+			}
+			if (player2) {
+				winner = "Player 2";
+				Destroy(player2);
+			}
 			winSign.text = winner + " won the Round";
 			winSign.GetComponent<Animator>().SetTrigger("RoundOver");
 		}

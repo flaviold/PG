@@ -66,7 +66,7 @@ public class MenuManager : MonoBehaviour {
 				break;
 
 			case 1:
-				ErrorMessage("Arena em desenvolvimento");
+			    SceneLoading("Arena2");
 				break;
 
 			case 2:

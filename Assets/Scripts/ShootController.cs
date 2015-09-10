@@ -6,7 +6,13 @@ public class ShootController : MonoBehaviour {
 	public float speed;
 	
 	void OnTriggerEnter (Collider other) {
-		if(other.tag == "Player"){
+		if (other.tag == "Shield"){
+			Vector3 tempVec = GetComponent<Rigidbody>().velocity;
+			tempVec.x *= -1;
+			GetComponent<Rigidbody>().velocity = tempVec;
+			return;
+		}
+		if (other.tag == "Player"){
 			GameManager.Kill(other.name);
 		}
 		Destroy(gameObject);
